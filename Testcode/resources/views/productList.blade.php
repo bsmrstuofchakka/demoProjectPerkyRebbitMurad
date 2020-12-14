@@ -2,9 +2,9 @@
 @extends('layouts.user')
 <script>
     var proList=[];
-    var price= 0;
-    var quantity= 0;
-    var Amount=0;
+    // var price= 1;
+    // var quantity= 1;
+    var Amount=1;
 </script>
 
 @section('content')
@@ -77,38 +77,89 @@
         </div>
     </div>
 <script>
+    var sumAmountTotalEle =[];
 
 
+    function productQuantity(quan,pId){
 
+        var quan=quan;
+        // var pId=pId;
+        var sumAmountTotal =0;
 
-    function productQuantity(quanV,quantId){
+        //price= $('.price').val();
+        var price= $('#price'+pId).val();
+        // console.log(price);
+        if(!quan){
+            quan=1;
+        }
+        if(!price){
+            price=1;
+        }
 
-        var quanV=quanV;
-        var quantId=quantId;
+        console.log("pId "+pId);
+        console.log("quantity "+quan);
+        console.log("price "+price);
 
-        console.log(quanV);
-        console.log(quantId);
-        price= $('#price').val();
+        Amount= quan*price;
+        console.log("Amount "+Amount);
+        // document.getElementsByClassName('.totalAmount') =Amount;
+        $('#totalAmount'+pId).html(Amount);
+        sumAmountTotalEle[pId]=Amount;
+        console.log('totalA: '+sumAmountTotalEle.length);
+        for(var n=1;n<sumAmountTotalEle.length;n++){
+            if(!sumAmountTotalEle[n]){
+                sumAmountTotalEle[n]=0
+            }else{
+                sumAmountTotal=sumAmountTotal+sumAmountTotalEle[n];
+            }
 
-
-        Amount= quanV*price;
-        console.log(Amount);
-        document.getElementById('totalAmount').innerHTML =Amount;
+        }
+        var tax = sumAmountTotal*(15/100);
+        var discount = 100;
+        var grand_total = sumAmountTotal+tax+discount;
+        console.log('sumAmountTotal '+sumAmountTotal);
+        $('#subTotal').html(sumAmountTotal);
+        $('#tax').html(tax);
+        $('#discount').html(discount);
+        $('#grand_total').html(grand_total);
 
 
     }
-    function productPrice(quanP,quantId){
+    function productPrice(pri,pId){
+        var sumAmountTotal =0;
+        var pri=pri;
+        // var pId=pId;
+        //quantity= $('.quantity').val();
+        var quantity=$('#quantity'+pId).val();
+        if(!pri){
+            pri=1;
+        }
+        if (!quantity){
+            quantity=1;
+        }
 
-        var quanP=quanP;
-        var quantId=quantId;
-        quantity= $('#quantity').val();
-        console.log(quanP);
-        console.log(quantId);
+        console.log("pId "+pId);
+        console.log("quantity "+quantity);
+        console.log("price "+pri);
 
-        Amount= quanP*price;
-        console.log(Amount);
-        document.getElementById('totalAmount').innerHTML =Amount;
 
+        Amount= pri*quantity;
+        console.log("Amount "+Amount);
+        // document.getElementsByName('totalAmount').innerHTML =Amount;
+        $('#totalAmount'+pId).html(Amount);
+        sumAmountTotalEle[pId]=Amount;
+        console.log('totalA: '+sumAmountTotalEle.length);
+        for(var n=1;n<sumAmountTotalEle.length;n++){
+            sumAmountTotal=sumAmountTotal+sumAmountTotalEle[n];
+        }
+        var tax = sumAmountTotal*(15/100);
+        var discount = 100;
+        var grand_total = sumAmountTotal+tax+discount;
+        console.log('sumAmountTotal '+sumAmountTotal);
+        $('#subTotal').html(sumAmountTotal);
+        $('#tax').html(tax);
+        $('#discount').html(discount);
+        $('#grand_total').html(grand_total);
 
     }
     function  productSelection(checkbox){
@@ -148,23 +199,3 @@
 </script>
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

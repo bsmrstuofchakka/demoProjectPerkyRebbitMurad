@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 use App\Http\Controllers\ProductController;
 
-Route::get('/', function () {
+Route::get('wel', function () {
     return view('welcome');
 });
 
 Route::get('particularProduct','App\Http\Controllers\ProductController@particularProduct');
-Route::get('showProduct','App\Http\Controllers\ProductController@showProduct');
+Route::get('/','App\Http\Controllers\ProductController@showProduct');
 Route::get('productAdd','App\Http\Controllers\ProductController@productAdd');
 Route::post('productSave','App\Http\Controllers\ProductController@productSave');

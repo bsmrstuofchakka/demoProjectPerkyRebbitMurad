@@ -66,7 +66,7 @@
     </div>
     <div class="grid_12">
         <ul class="nav main">
-            <li class="ic-dashboard"><a href="/"><span>Dashboard</span></a> </li>
+            <li class="ic-dashboard"><a href="{{asset('wel')}}"><span>Dashboard</span></a> </li>
         </ul>
     </div>
     <div class="clear">
@@ -79,7 +79,7 @@
                     <li><a class="menuitem">Product Option</a>
                         <ul class="submenu">
                             <li><a href="{{asset('productAdd')}}">Add Product</a> </li>
-                            <li><a href="{{asset('showProduct')}}">Product List</a> </li>
+                            <li><a href="{{asset('/')}}">Product List</a> </li>
                         </ul>
                     </li>
                 </ul>

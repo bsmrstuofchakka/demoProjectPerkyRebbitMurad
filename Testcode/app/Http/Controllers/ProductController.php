@@ -39,7 +39,7 @@ class ProductController extends Controller
         $data->product_name = $request->product_name;
         $data->product_unit = $request->product_unit;
         $data->save();
-        return redirect('showProduct');
+        return redirect('/');
     }
 
     public function particularProduct(Request  $request){
@@ -48,20 +48,40 @@ class ProductController extends Controller
         $calculationOfTableForProduct="";
 
         if(!empty($proList)){
-            foreach ($proList as$proL){
+            foreach ($proList as $proL){
                 $calculationOfTableForProduct=$calculationOfTableForProduct.'  <tr class="odd gradeX">
                                 <td>'.$proL->product_code.'</td>
                                 <td>'.$proL->product_name.'</td>
                                 <td>'.$proL->product_unit.'</td>
-                                <td><input type="number" id="quantity" onchange="productQuantity(this.value,'.$proL->id.');"   name="quantity"></td>
-                                <td><input type="number" id="price" onchange="productPrice(this.value,'.$proL->id.');"   name="price"></td>
-                                <td id="totalAmount"></td>
+                                <td><input type="number" id="quantity'.$proL->id.'" class="quantity" oninput="productQuantity(this.value,'.$proL->id.');"   name="quantity"></td>
+                                <td><input type="number" id="price'.$proL->id.'" class="price" oninput="productPrice(this.value,'.$proL->id.');"   name="price"></td>
+                                <td id="totalAmount'.$proL->id.'" ></td>
 
 
                             </tr>';
 
             }
         }
+        $calculationOfTableForProduct=$calculationOfTableForProduct.'
+            <div>
+                <tr style="text-align: center">
+                    <td>Sub Total</td>
+                    <td id="subTotal"></td>
+                </tr>
+                 <tr style="text-align: center">
+                    <td>Tax(15%)</td>
+                    <td id="tax"></td>
+                </tr>
+                <tr style="text-align: center">
+                    <td>Discount</td>
+                    <td id="discount"></td>
+                </tr>
+                 <tr style="text-align: center">
+                    <td>Grand Total</td>
+                    <td id="grand_total"></td>
+                </tr>
+                </div>
+        ';
 
         return response()->json(['calculationOfTableForProduct'=>$calculationOfTableForProduct]);
     }
